@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Surprise</title>
+    <style>
+        body {
+            background-color: red;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin-top: 20vh;
+            font-size: 3rem;
+        }
+
+        p, #poem {
+            font-size: 1.5rem;
+            margin: 10px auto;
+            width: 90%; /* Ensure full visibility */
+            line-height: 1.5em;
+        }
+
+        .falling-heart, .falling-photo {
+            position: absolute;
+            top: -100px; /* Start from above the screen */
+            animation: fall 7s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        #yesButton {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: white;
+            color: red;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #poem {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Astha, Will you become my Valentine?</h1>
+    <p id="surprise-text">A surprise awaits you inside</p>
+    <button id="yesButton">Click Yes to know</button>
+
+    <p id="poem">
+        You are my melody divine,<br>
+        Will you be my Valentine?<br>
+        Your smile, stronger than the finest wine😉<br>
+        Your eyes make my heart entwine<br>
+        With you, my soul is on cloud nine.<br>
+        <br>
+        <strong>Happy Valentine's Day❤️✨</strong>
+    </p>
+
+    <audio id="bg-music" loop>
+        <source src="HuzoorMera.mp3.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.getElementById("yesButton").addEventListener("click", function() {
+            document.getElementById("poem").style.display = "block";
+            document.getElementById("surprise-text").style.display = "none";
+            document.getElementById("yesButton").style.display = "none";
+            document.getElementById("bg-music").play();
+        });
+
+        function createFallingHearts() {
+            let heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("falling-heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 30 + 20 + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        function createFallingPhotos() {
+            const photoArray = ["a1.jpeg", "a2.jpeg", "a3.jpeg", "a4.jpeg"];
+            let img = document.createElement("img");
+            img.src = photoArray[Math.floor(Math.random() * photoArray.length)];
+            img.classList.add("falling-photo");
+            img.style.left = Math.random() * 100 + "vw";
+            img.style.width = "80px";
+            img.style.height = "80px";
+            img.style.clipPath = "circle()";
+            document.body.appendChild(img);
+            setTimeout(() => img.remove(), 7000);
+        }
+
+        setInterval(createFallingHearts, 500);
+        setInterval(createFallingPhotos, 1500);
+    </script>
+</body>
+</html>
